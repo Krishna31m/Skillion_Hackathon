@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 from datetime import timedelta
+from django.core.cache import cache
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -198,9 +199,26 @@ SIMPLE_JWT = {
 CORS_ALLOW_ALL_ORIGINS = True # Allow all origins for development
 
 
-# Custom Settings
-RATE_LIMIT_STORAGE = {} # Simple in-memory storage for rate limiting (dev/mock)
-IDEMPOTENCY_CACHE = {} # Simple in-memory cache for idempotency (dev/mock)
+# Cache / Redis configuration
+# If REDIS_URL is provided, configure django-redis as the default cache backend.
+REDIS_URL = os.environ.get('REDIS_URL')
+if REDIS_URL:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': REDIS_URL,
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            }
+        }
+    }
+    # Use Django cache for rate-limit/idempotency
+    RATE_LIMIT_STORAGE = cache
+    IDEMPOTENCY_CACHE = cache
+else:
+    # Simple in-memory storage for rate limiting and idempotency (dev/mock)
+    RATE_LIMIT_STORAGE = {}
+    IDEMPOTENCY_CACHE = {}
 
 # Roles
 ROLE_LEARNER = 1

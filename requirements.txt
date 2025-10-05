@@ -7,3 +7,4 @@ gunicorn>=20.1.0  # production WSGI server (if deploying to Linux)
 whitenoise>=6.0.0
 dj-database-url>=1.0.0
 drf-nested-routers>=0.93
+django-redis>=5.2.0
