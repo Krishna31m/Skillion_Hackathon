@@ -1,0 +1,91 @@
+
+// http://127.0.0.1:8000/api/v1/users/register/
+// {
+//     "username": "learner2",
+//     "email": "learner2@example.com",
+//     "password": "learnerpass",
+//     "password2": "learnerpass"
+// }
+
+
+
+
+// http://127.0.0.1:8000/api/v1/users/login/
+// {
+//     "username": "learner2",
+//     "password": "learnerpass"
+// }
+
+
+
+// http://127.0.0.1:8000/api/v1/creator/apply/
+
+// {
+//     "motivation": "I want to teach Web Development."
+// }
+// output
+// {
+//   "id": 3,
+//   "applicant": 5,
+//   "applicant_username": "learner2",
+//   "motivation": "I want to teach Web Development.",
+//   "status": 1,
+//   "status_name": "Pending",
+//   "applied_at": "2025-10-04T09:49:56.147563Z"
+// }
+
+
+// SuperUser
+// http://127.0.0.1:8000/api/v1/users/login/
+// {
+//     "username": "",
+//     "password": ""
+// }
+
+
+// PUT: http://127.0.0.1:8000/api/v1/admin/creator-applications/1/
+// {
+//     "status": 2 
+//     // 2 is STATUS_APPROVED, updating 'learner2' to Creator Role (ID 2)
+// }
+
+// output
+// {
+//   "id": 1,
+//   "applicant": 2,
+//   "applicant_username": "creator1",
+//   "motivation": "I have extensive experience in Python and machine learning and wish to share my knowledge with the LMS community.",
+//   "status": 2
+// }
+
+// http://127.0.0.1:8000/api/v1/users/login/
+// {
+//     "username": "learner2",
+//     "password": "learnerpass"
+// }
+
+// POST: http://127.0.0.1:8000/api/v1/courses/
+// {
+//     "title": "Django URL Routing Masterclass",
+//     "description": "Learn to master Django and DRF URL routing with nested routers and clean API design."
+//     // Note: status is read-only, will be default 1 (Draft)
+// }
+
+
+// http://127.0.0.1:8000/api/v1/courses/1/lessons/
+// Authenticated Creator (learner2)
+// {
+//     "title": "Module 1.1: Core Concepts of Router Matching",
+//     "content": "Lesson content explaining Django's path() function and regular expression usage.",
+//     "order": 1 // Note: The system auto-generates the order, but providing it manually is harmless.
+// }
+// {
+//     "title": "Module 1.2: Nested Routers in DRF",
+//     "content": "Advanced concepts on nesting serializers and filtering in nested viewsets.",
+//     "order": 2 
+// }
+
+{
+    "status": 3 
+    // 3 is STATUS_PUBLISHED
+}
