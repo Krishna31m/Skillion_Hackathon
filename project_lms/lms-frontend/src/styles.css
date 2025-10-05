@@ -1,0 +1,89 @@
+:root{
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --glass: rgba(255,255,255,0.6);
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%;}
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+  color: #111827;
+  -webkit-font-smoothing:antialiased;
+}
+
+.app-container{max-width:1100px;margin:30px auto;padding:0 16px;}
+
+/* Navbar */
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card);border-radius:10px;box-shadow:0 1px 4px rgba(15,23,42,0.06);}
+.navbar .brand{font-weight:700;color:var(--accent);text-decoration:none}
+.nav-links{display:flex;gap:12px;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;border:1px solid transparent;cursor:pointer;font-weight:600}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.btn-primary{background:var(--accent);color:white}
+.btn-ghost{background:transparent;border-color:transparent;color:var(--accent)}
+.btn-danger{background:var(--danger);color:white}
+
+/* Cards and lists */
+.card{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(15,23,42,0.06);}
+.list{list-style:none;padding:0;margin:0}
+.list-item{padding:12px;border-bottom:1px dashed #eef2f7}
+
+/* Forms */
+.form{display:flex;flex-direction:column;gap:10px}
+.form-input{padding:10px;border-radius:8px;border:1px solid #e6e9ef}
+.form-textarea{padding:10px;border-radius:8px;border:1px solid #e6e9ef;resize:vertical}
+
+/* Alerts */
+.alert{padding:10px;border-radius:8px;font-weight:600}
+.alert.info{background:#eff6ff;color:#084298;border-left:4px solid #93c5fd}
+.alert.success{background:#ecfdf5;color:#065f46;border-left:4px solid #86efac}
+.alert.error{background:#fff1f2;color:#7f1d1d;border-left:4px solid #fca5a5}
+
+/* Utility */
+.muted{color:var(--muted)}
+.mb-10{margin-bottom:10px}
+.mt-20{margin-top:20px}
+.flex{display:flex}
+.gap-10{gap:10px}
+
+@media (max-width:720px){
+  .app-container{padding:0 12px;margin:16px}
+  .navbar{flex-direction:column;align-items:flex-start;gap:8px}
+}
+
+/* Modal styles */
+.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.45);display:flex;align-items:center;justify-content:center;z-index:9999}
+.modal{background:var(--card);width:90%;max-width:900px;border-radius:12px;box-shadow:0 18px 40px rgba(2,6,23,0.25);overflow:hidden}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #eef2f7}
+.modal-body{padding:16px;max-height:70vh;overflow:auto}
+.modal-close{background:transparent;border:0;font-size:18px;cursor:pointer}
+.modal textarea{width:100%;min-height:260px;resize:vertical;padding:12px;border-radius:8px;border:1px solid #e6e9ef}
+
+/* Lesson content styling */
+.lesson-content{font-family: Georgia, 'Times New Roman', serif; color:#111827; line-height:1.8}
+.lesson-content p{margin:0 0 16px}
+.lesson-content h1,.lesson-content h2,.lesson-content h3{margin:16px 0 10px;color:var(--accent)}
+.lesson-content h4{margin:12px 0 8px}
+.lesson-content ul,.lesson-content ol{margin:0 0 16px 1.25rem}
+.lesson-content blockquote{border-left:4px solid #e6eef6;padding:8px 16px;background:#fbfdff;margin:0 0 16px}
+.lesson-content img{max-width:100%;height:auto;border-radius:6px;margin:12px 0}
+.lesson-content pre{background:#0b1220;color:#e6eef6;padding:12px;border-radius:8px;overflow:auto;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace}
+.lesson-content code{background:#f3f4f6;padding:2px 6px;border-radius:6px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace}
+.lesson-content table{width:100%;border-collapse:collapse;margin:12px 0}
+.lesson-content th,.lesson-content td{border:1px solid #eef2f7;padding:8px;text-align:left}
+.lesson-content a{color:var(--accent);text-decoration:underline}
+
+/* Additional spacing & modal code font tweaks */
+.lesson-content p{margin:0 0 18px;font-size:16px}
+.modal-body pre, .modal-body code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace}

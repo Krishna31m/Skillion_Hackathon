@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>{{ certificate.title }}</title>
+  <style>
+    :root{--ink:#0f172a;--muted:#6b7280;--accent:#0ea5e9}
+    body { font-family: 'Georgia', serif; color:var(--ink); background: #f8fafc; padding: 30px; }
+    .wrap { display:flex; justify-content:center }
+    .certificate { background: #fff; border: 12px solid #e6eef6; padding: 44px 56px; width:100%; max-width:980px; box-shadow: 0 12px 34px rgba(2,6,23,0.08); }
+    .header { display:flex; align-items:center; justify-content:space-between; gap:12px }
+    .logo { width:120px; height:80px; object-fit:contain }
+    .title { font-size:40px; font-weight:700; color:var(--accent); letter-spacing:0.6px }
+    .subtitle { color:var(--muted); margin-top:8px }
+
+    .body { text-align:center; margin-top:36px }
+    .lead { font-size:18px; color:var(--muted); margin-bottom:8px }
+    .recipient { font-size:40px; font-weight:800; margin: 10px 0; }
+    .course { font-size:20px; margin-top:8px }
+
+    .meta { display:flex; justify-content:space-between; gap:12px; margin-top:32px; align-items:center }
+    .meta-left{ text-align:left }
+    .meta-right{ text-align:right }
+    .small { color:var(--muted); font-size:14px }
+
+    .id { font-family: monospace; background:#f3f4f6; padding:6px 8px; border-radius:6px; display:inline-block }
+
+    .signatures { margin-top:40px; display:flex; justify-content:space-between; gap:24px }
+    .signature { width:45%; text-align:center }
+    .sig-line{ margin-top:28px; border-top:1px solid #ddd; padding-top:6px; font-weight:600 }
+
+    @media print{
+      body{background:white}
+      .certificate{box-shadow:none;border-color:#ddd}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="certificate">
+      <div class="header">
+        <div>
+          <div class="title">{{ certificate.title|default:'Certificate of Completion' }}</div>
+          <div class="subtitle">{{ certificate.completion_statement|default:'This is to certify successful completion of the course.' }}</div>
+        </div>
+        <div>
+          {# Use provided GitHub raw image as default logo when no issuer_logo_url is supplied #}
+          <img src="{{ certificate.issuer_logo_url|default:'https://raw.githubusercontent.com/Krishna31m/Book-review/main/image.png' }}" alt="Issuer Logo" class="logo" />
+        </div>
+      </div>
+
+      <div class="body">
+        <div class="lead">This is to certify that</div>
+        <div class="recipient">{{ certificate.recipient_name }}</div>
+        <div class="lead">has successfully completed</div>
+        <div class="course">{{ certificate.course_title }}{% if certificate.course_code %} ({{ certificate.course_code }}){% endif %}</div>
+
+        <div class="meta">
+          <div class="meta-left small">
+            <div>Date of completion: <strong>{{ certificate.issued_at|date:"F j, Y" }}</strong></div>
+            {% if certificate.duration_hours %}
+              <div>Duration: <strong>{{ certificate.duration_hours }}</strong></div>
+            {% endif %}
+            {% if certificate.grade %}
+              <div>Achievement: <strong>{{ certificate.grade }}</strong></div>
+            {% endif %}
+          </div>
+          <div class="meta-right small">
+            <div>Issued by: <strong>{{ certificate.issuer_name }}</strong></div>
+            <div style="margin-top:8px">Certificate ID</div>
+            <div class="id">{{ certificate.serial_hash|slice:":10" }}...</div>
+            <div style="margin-top:6px;font-size:12px;color:var(--muted)">Verify at: <br><a href="{{ request.build_absolute_uri|slice:':-1' }}{{ '/' }}" style="color:var(--accent);text-decoration:none;">Certificate Verify URL</a></div>
+          </div>
+        </div>
+
+        <div class="signatures">
+          <div class="signature">
+            <div class="sig-line">{{ certificate.signature_text|default:'(Signature) — Instructor' }}</div>
+            <div class="small" style="margin-top:6px">Instructor</div>
+          </div>
+          <div class="signature">
+            <div class="sig-line">_______________________</div>
+            <div class="small" style="margin-top:6px">Director — Krishna</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
