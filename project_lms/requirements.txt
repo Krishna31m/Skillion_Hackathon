@@ -1,5 +1,20 @@
 Django>=5.0,<6.0
 djangorestframework>=3.14,<4.0
 djangorestframework-simplejwt>=5.3,<6.0
+
+# Database drivers (choose only one depending on DB)
+psycopg2-binary>=2.9.9   # PostgreSQL
+# mysqlclient>=2.2.4     # Uncomment if using MySQL
+
+# Deployment tools
 gunicorn>=21.2.0
-psycopg2-binary>=2.9.9
+whitenoise>=6.6.0   # For serving static files in production
+
+# Optional but common
+django-cors-headers>=4.3.1
+channels>=4.0.0       # If you use WebSockets
+celery>=5.3.6         # If you need background tasks
+
+# Env management
+python-decouple>=3.8
+django-environ>=0.11.2
