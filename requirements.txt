@@ -1,0 +1,9 @@
+Django==5.2.6
+djangorestframework>=3.14.0
+djangorestframework-simplejwt>=5.2.2
+django-cors-headers>=4.0.0
+psycopg2-binary>=2.9.0  # only needed if switching to Postgres
+gunicorn>=20.1.0  # production WSGI server (if deploying to Linux)
+whitenoise>=6.0.0
+dj-database-url>=1.0.0
+drf-nested-routers>=0.93

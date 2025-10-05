@@ -19,7 +19,7 @@ export default function DashboardPage() {
             {role === 'Learner' && (
               <>
                 <Card><Link to="/enrollment">Browse Courses & Track Progress</Link></Card>
-                <Card><Link to="/course-manager">Apply to be a Creator</Link></Card>
+                {/* <Card><Link to="/course-manager">Apply to be a Creator</Link></Card> */}
               </>
             )}
             {role === 'Creator' && (

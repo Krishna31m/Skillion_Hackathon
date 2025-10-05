@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME:-project_lms_db}
+      POSTGRES_USER: ${DATABASE_USER:-project_lms_user}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-supersecretpassword}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  web:
+    build: .
+    command: gunicorn project_lms.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-False}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
+      DATABASE_NAME: ${DATABASE_NAME:-project_lms_db}
+      DATABASE_USER: ${DATABASE_USER:-project_lms_user}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-supersecretpassword}
+      DATABASE_HOST: db
+      DATABASE_PORT: ${DATABASE_PORT:-5432}
+    depends_on:
+      - db
+volumes:
+  postgres_data:
