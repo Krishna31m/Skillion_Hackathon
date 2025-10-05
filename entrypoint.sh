@@ -10,9 +10,9 @@ if [ "$DATABASE_HOST" != "" ] && [ "$DATABASE_HOST" != "127.0.0.1" ]; then
   done
 fi
 
-# Run migrations and collectstatic
-python project_lms/manage.py migrate --noinput
-python project_lms/manage.py collectstatic --noinput
+# Run migrations and collectstatic (run from Django project directory)
+python manage.py migrate --noinput
+python manage.py collectstatic --noinput
 
 # Start the container command
 exec "$@"
