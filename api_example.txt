@@ -38,8 +38,8 @@
 // SuperUser
 // http://127.0.0.1:8000/api/v1/users/login/
 // {
-//     "username": "",
-//     "password": ""
+//     "username": "Krishna",
+//     "password": "user@123"
 // }
 
 
